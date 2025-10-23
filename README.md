@@ -1,7 +1,86 @@
 ![logo](images/logo.png)
 
 
-cloacked-pixel
+Image Payloading
+
+### 🔐 Image Payloading Encryption and Decryption with LSB
+
+This project demonstrates **image payload encryption and decryption** using **Least Significant Bit (LSB) steganography**, a method of concealing encrypted data within digital images. It combines **cryptography** and **steganography** to enhance data confidentiality and security.
+
+---
+
+### 🧠 Concept Overview
+
+1. **Encryption Phase**
+
+   * The plaintext message (payload) is first **encrypted** using a symmetric encryption algorithm (e.g., AES or custom cipher).
+   * This transforms readable text into **ciphertext**, preventing unauthorized interpretation even if extracted.
+
+2. **Embedding Phase (LSB Steganography)**
+
+   * The encrypted payload is then hidden within a **cover image** by modifying the **least significant bits (LSBs)** of the pixel values.
+   * Because changes to LSBs cause **minimal distortion**, the visual appearance of the image remains nearly identical to the original.
+   * Each bit of the encrypted message replaces the LSB of the RGB values of the image pixels in sequence.
+
+3. **Extraction Phase**
+
+   * During decryption, the process is reversed.
+   * The program scans the stego-image pixel-by-pixel, retrieves the LSBs, and reconstructs the binary data stream.
+
+4. **Decryption Phase**
+
+   * The extracted binary data is **decrypted** using the same key used in encryption.
+   * The original plaintext message is restored and displayed or stored securely.
+
+---
+
+### 🔄 Workflow Summary
+
+| Stage | Operation                | Description                                                |
+| ----- | ------------------------ | ---------------------------------------------------------- |
+| 1     | **Encrypt Message**      | Convert plaintext into ciphertext using an encryption key. |
+| 2     | **Embed with LSB**       | Hide the encrypted bits inside pixel LSBs of the image.    |
+| 3     | **Generate Stego Image** | Output the image visually identical to the original.       |
+| 4     | **Extract Payload**      | Read LSBs to reconstruct the hidden binary data.           |
+| 5     | **Decrypt Message**      | Use the same key to decrypt ciphertext back to plaintext.  |
+
+---
+
+### ⚙️ Key Features
+
+* Supports **text-to-image encryption** and **image-to-text decryption**.
+* Uses **LSB substitution** for imperceptible data hiding.
+* Implements **cryptographic key-based encryption** for payload protection.
+* Maintains image quality with minimal distortion (high PSNR values).
+
+---
+
+### 🧩 Example Use Case
+
+* Secure message transmission through images in online communication.
+* Hiding confidential data in media for digital forensics or authentication.
+* Protecting sensitive files or metadata in multimedia systems.
+
+---
+
+### 🔒 Security Insight
+
+While LSB steganography conceals data effectively, combining it with **encryption** significantly strengthens security. Even if the hidden data is detected, it remains unreadable without the correct decryption key — ensuring **double-layered protection**.
+
+---
+
+### 🧾 References
+
+* Johnson, N. F., & Jajodia, S. (1998). *Exploring Steganography: Seeing the Unseen.* IEEE Computer.
+* Katzenbeisser, S., & Petitcolas, F. A. P. (2000). *Information Hiding Techniques for Steganography and Digital Watermarking.*
+
+---
+
+### 📦 Output
+
+* **Input:** Plaintext message + Cover image + Encryption key
+* **Output:** Stego image + Recovered plaintext after decryption
+
 ==========
 
 Platform independent Python tool to implement LSB image steganography and a basic detection technique. Features:
@@ -20,7 +99,8 @@ How to use:
       lsb.py hide <img_file> <payload_file> <password>
       lsb.py extract <stego_file> <out_file> <password>
       lsb.py analyse <stego_file>
-
+    
+    $ python lsb_gui.py 
 
 Hide
 ----
@@ -41,46 +121,19 @@ Encrypt and hide an archive:
 
 
  
-Original image:
+Hiding Payload on image:
 
-![original image](images/orig.jpg)
+!["gui hide success image"](C:\Users\user\image_payloading\images\gui hide success.png)
 
-Image with 75k archive embedded:
 
-![Embedded archive](images/stego.jpg)
- 
-Extract
--------
+Extracting Payload on Encrypted image
+!["gui extract success image"](C:\Users\user\image_payloading\images\gui extract success.png)
 
-    $ python lsb.py extract samples/orig.jpg-stego.png out p@$5w0rD 
-    [+] Image size: 640x425 pixels.
-    [+] Written extracted data to out.
-    
-    $ file out 
-    out: Zip archive data, at least v1.0 to extract
+Analyse
 
-Detection
----------
+!["gui analyse success image"](C:\Users\user\image_payloading\images\gui analyse success.png)
 
-A simple way to detect tampering with least significant bits of images is based on the observation above – regions within tampered images will have the average of LSBs around 0.5, because the LSBs contain encrypted data, which is similar in structure with random data. So in order to analyse an image, we split it into blocks, and for each block calculate the average of LSBs. To analyse a file, we use the following syntax:
 
-    $ python lsb.py analyse <stego_file>
-
-**Example**
-
-![Castle](images/castle.jpg)
-
-Now let’s analyse the original:
-
-    $ python lsb.py analyse castle.jpg
-
-![Original iamge analysis](images/analysis-orig.png)
-
-… and now the one containing  our payload:
-
-    $ python lsb.py analyse castle.jpg-stego.png
-
-![Stego image analysis](images/analysis-stego.png)
 
 
 Notes
