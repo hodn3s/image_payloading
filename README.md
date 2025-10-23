@@ -107,14 +107,14 @@ How to use:
 Hiding Payload on image:
 
 ### Hiding Payload on Encrypted Image
-(images/hide_success.png)
+![image](images/hide_success.png)
 
 
 ### Extracting Payload on Encrypted Image
-(images/extract_success.png)
+![image](images/extract_success.png)
 
 ### Analyse
-(images/analyse_success.png)
+![image](images/analyse_success.png)
 
 
 
