@@ -102,36 +102,19 @@ How to use:
     
     $ python lsb_gui.py 
 
-Hide
-----
-
-All data is encrypted before being embedded into a picture. Encryption is not optional. Two consequences of this are that:
-
- - The payload will be slightly larger.
- - The encrypted payload will have a high entropy and will be similar to random data. This is why the frequency of 0s and 1s in the LSB position should be the same – 0.5. In many cases, real images don’t have this propriety and we’ll be able to distinguish unaltered images from the ones with embedded data. More below.
-
-Encrypt and hide an archive:
-
-    $ python lsb.py hide samples/orig.jpg samples/secret.zip p@$5w0rD
-    [*] Input image size: 640x425 pixels.
-    [*] Usable payload size: 99.61 KB.
-    [+] Payload size: 74.636 KB 
-    [+] Encrypted payload size: 74.676 KB 
-    [+] samples/secret.zip embedded successfully!
-
 
  
 Hiding Payload on image:
 
-!["gui hide success image"](C:\Users\user\image_payloading\images\gui hide success.png)
+### Hiding Payload on Encrypted Image
+![GUI Hide Success Image](./images/gui_hide_success.png)
 
+### Extracting Payload on Encrypted Image
+![GUI Extract Success Image](./images/gui_extract_success.png)
 
-Extracting Payload on Encrypted image
-!["gui extract success image"](C:\Users\user\image_payloading\images\gui extract success.png)
+### Analyse
+![GUI Analyse Success Image](./images/gui_analyse_success.png)
 
-Analyse
-
-!["gui analyse success image"](C:\Users\user\image_payloading\images\gui analyse success.png)
 
 
 
