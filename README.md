@@ -20,6 +20,8 @@ How to use:
       lsb.py hide <img_file> <payload_file> <password>
       lsb.py extract <stego_file> <out_file> <password>
       lsb.py analyse <stego_file>
+      lsb.py heatmap <original_img> <stego_img>
+
 
 
 Hide
